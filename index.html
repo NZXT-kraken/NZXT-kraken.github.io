@@ -28,17 +28,17 @@
 
         /* 리퀴드 글라스 카드 */
         .glass-card {
-            background: linear-gradient(120deg, rgba(255,255,255,0.38) 60%, rgba(230,230,255,0.18) 100%);
+            background: linear-gradient(120deg, rgba(255,255,255,0.55) 60%, rgba(230,230,255,0.35) 100%);
             backdrop-filter: blur(32px) saturate(180%);
             -webkit-backdrop-filter: blur(32px) saturate(180%);
             border-radius: 28px;
-            border: 1.5px solid rgba(255,255,255,0.18);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13), 0 1.5px 8px 0 rgba(120, 120, 255, 0.05);
+            border: 1.5px solid rgba(255,255,255,0.28);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 1.5px 8px 0 rgba(120, 120, 255, 0.08);
             transition: box-shadow 0.3s, transform 0.3s;
             overflow: hidden;
         }
         .glass-card:hover {
-            box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.18), 0 2px 16px 0 rgba(120, 120, 255, 0.08);
+            box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.22), 0 2px 16px 0 rgba(120, 120, 255, 0.12);
             transform: translateY(-4px) scale(1.015);
         }
 
@@ -121,6 +121,32 @@
         footer .glass-card .border-t {
             border-color: rgba(120,120,120,0.15) !important;
         }
+
+        /* 섹션 페이드 인 애니메이션 */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1s cubic-bezier(.33,1,.68,1), transform 1s cubic-bezier(.33,1,.68,1);
+        }
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 포커스 블러 오버레이 */
+        .section-blur-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            pointer-events: none;
+            backdrop-filter: blur(18px) brightness(0.9);
+            -webkit-backdrop-filter: blur(18px) brightness(0.9);
+            transition: opacity 0.5s;
+            opacity: 0;
+        }
+        .section-blur-overlay.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -160,20 +186,20 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section class="fade-section min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="text-center">
             <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
-                <span class="wolf-emoji">🐺</span> WOOFEE 서버에 오신 것을 환영합니다!
+                <span class="wolf-emoji">🐺</span> WOOFEE 서버에 오신 것을 환환합니다!
             </h1>
             <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
                 건축과 야생, 모드 플레이부터 다채로운 이벤트까지!<br>
                 당신의 상상력이 현실이 되는 마인크래프트 서버
             </p>
             <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="#join" class="liquid-btn px-8 py-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-lg font-medium">
+                <a href="#join" class="liquid-btn px-8 py-4 rounded-full text-lg font-medium">
                     지금 참여하기
                 </a>
-                <a href="#about" class="liquid-btn px-8 py-4 text-gray-700 bg-white rounded-full text-lg font-medium">
+                <a href="#about" class="liquid-btn px-8 py-4 rounded-full text-lg font-medium">
                     더 알아보기
                 </a>
             </div>
@@ -181,7 +207,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section id="about" class="fade-section py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="glass-card p-8 md:p-12">
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
                 <span class="wolf-emoji">🐺</span> WOOFEE 서버는
@@ -228,7 +254,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section id="features" class="fade-section py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <h2 class="text-4xl font-bold text-center text-gray-800 mb-16">
             WOOFEE의 다양한 특징 <span class="wolf-emoji">🐺</span>
         </h2>
@@ -334,14 +360,12 @@
                 <span class="wolf-emoji">🐺</span> 함께 할 준비 되셨나요?
             </h2>
             <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                WOOFEE 서버의 즐거운 여정에 함께하세요! 아래 버튼을 클릭해 디스코드 커뮤니티에 참여하고, 서버 접속 방법을 확인해 보세요.
+                지금 바로 WOOFEE 서버에 참여하여 나만의 마인크래프트 이야기를 시작해보세요!<br>
+                디스코드에서 저희와 소통하며 더 많은 정보를 얻을 수 있습니다.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="https://discord.gg/RcxArhjVpe" target="_blank" rel="noopener" class="liquid-btn px-8 py-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-lg font-medium">
-                    <i class="fab fa-discord mr-2"></i> 디스코드 참여하기
-                </a>
-                             </a>
-            </div>
+            <a href="https://discord.gg/RcxArhjVpe" target="_blank" class="liquid-btn px-8 py-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-lg font-medium">
+                디스코드 참여하기
+            </a>
         </div>
     </section>
 
@@ -378,6 +402,83 @@
         </div>
     </section>
 
+    <!-- Minecraft Server Status Section -->
+<section id="server-status" class="fade-section py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="glass-card p-8 rounded-2xl text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            <i class="fas fa-signal text-green-500 mr-2"></i> 서버 상태
+        </h2>
+        <div id="mc-status" class="text-xl text-gray-700">
+            서버 상태를 불러오는 중...
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Close mobile menu if open
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+
+            const target = document.querySelector(this.getAttribute('href'));
+            if (!target) return;
+
+            const top = target.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+                top: top,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // 섹션 페이드 인 애니메이션 (Intersection Observer)
+    document.querySelectorAll('.fade-section').forEach(section => {
+        section.classList.remove('visible');
+    });
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // mcstatus.io API로 서버 상태 확인
+    const statusDiv = document.getElementById('mc-status');
+    fetch('https://api.mcstatus.io/v2/status/java/woofee.m-c.kr')
+        .then(res => res.json())
+        .then(data => {
+            if (data.online) {
+                statusDiv.innerHTML = `
+                    <span class="font-bold text-green-600">온라인</span> |
+                    접속자: <span class="font-bold">${data.players.online}</span> / ${data.players.max}
+                `;
+            } else {
+                statusDiv.innerHTML = `<span class="font-bold text-red-600">오프라인</span>`;
+            }
+        })
+        .catch(() => {
+            statusDiv.innerHTML = `<span class="font-bold text-red-600">상태 확인 불가</span>`;
+        });
+});
+</script>
+
     <!-- Footer -->
     <footer class="py-12 px-4 sm:px-6 lg:px-8">
         <div class="glass-card rounded-2xl p-8 max-w-7xl mx-auto">
@@ -398,29 +499,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                // Close mobile menu if open
-                mobileMenu.classList.add('hidden');
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
